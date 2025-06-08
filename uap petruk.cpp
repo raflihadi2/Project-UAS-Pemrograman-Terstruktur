@@ -14,7 +14,7 @@ struct Resep {
     double skorKecocokan;
 };
 
-// Test Update Fungsi input dari user
+// Fungsi input dari user
 void inputBahanDariUser(vector<string>& bahanTersedia) {
     cout << "Masukkan bahan makanan yang tersedia (ketik 'selesai' untuk berhenti):\n";
     string bahan;
@@ -26,7 +26,7 @@ void inputBahanDariUser(vector<string>& bahanTersedia) {
     }
 }
 
-// Test Update Hitung jumlah bahan cocok
+// Hitung jumlah bahan cocok
 int jumlahBahanCocok(const vector<string>& tersedia, const vector<string>& bahanResep) {
     int cocok = 0;
     for (const string& b : bahanResep) {
