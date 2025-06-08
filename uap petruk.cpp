@@ -36,3 +36,5 @@ int jumlahBahanCocok(const vector<string>& tersedia, const vector<string>& bahan
     }
     return cocok;
 }
+
+string intan;
