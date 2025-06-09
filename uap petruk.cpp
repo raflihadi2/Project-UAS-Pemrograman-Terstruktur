@@ -105,3 +105,44 @@ void simpanKeFile(const vector<Resep>& hasil, int totalGizi) {
     out << "Total Gizi: " << totalGizi << "\n";
     out.close();
 }
+
+int main() {
+    vector<string> bahanTersedia;
+    inputBahanDariUser(bahanTersedia);
+
+    vector<Resep> semuaResep = {
+        {"Nasi Goreng", {"nasi", "bawang putih", "telur", "kecap manis", "minyak"}, 15, 80},
+        {"Ayam Bakar", {"ayam", "bawang putih", "kecap manis", "cabai", "garam"}, 30, 90},
+        {"Tumis Sayur", {"wortel", "bawang putih", "kol", "minyak", "garam"}, 10, 70},
+        {"Telur Dadar", {"telur", "bawang merah", "garam", "minyak"}, 5, 50},
+        {"Sup Ayam", {"ayam", "wortel", "bawang putih", "seledri", "garam"}, 25, 85},
+        {"Capcay", {"wortel", "kol", "sawi", "bawang putih", "minyak"}, 20, 75},
+        {"Soto Ayam", {"ayam", "bawang putih", "serai", "daun salam", "garam"}, 40, 90},
+        {"Bakwan Jagung", {"jagung", "tepung terigu", "bawang merah", "seledri", "air"}, 15, 65},
+        {"Nasi Uduk", {"beras", "santan", "daun salam", "serai", "garam"}, 30, 80},
+        {"Sayur Lodeh", {"terong", "labu siam", "santan", "bawang merah", "cabai"}, 25, 70},
+        {"Perkedel Kentang", {"kentang", "telur", "bawang merah", "garam", "minyak"}, 20, 65},
+        {"Tempe Orek", {"tempe", "kecap manis", "bawang putih", "cabai", "gula"}, 15, 60},
+        {"Mie Goreng", {"mie", "bawang putih", "kecap manis", "sayur", "telur"}, 20, 75},
+        {"Ayam Goreng", {"ayam", "bawang putih", "kunyit", "garam", "minyak"}, 25, 85},
+        {"Tahu Isi", {"tahu", "wortel", "bawang putih", "tepung terigu", "air"}, 20, 60},
+        {"Gado-Gado", {"kentang", "tahu", "telur", "sayur", "saus kacang"}, 30, 85},
+        {"Nasi Kuning", {"beras", "santan", "kunyit", "daun salam", "serai"}, 35, 90},
+        {"Sayur Asem", {"labu siam", "melinjo", "jagung", "asam jawa", "bawang merah"}, 30, 70},
+        {"Sate Ayam", {"ayam", "kecap manis", "saus kacang", "bawang putih", "tusuk sate"}, 35, 95},
+        {"Semur Daging", {"daging", "bawang merah", "kecap manis", "kentang", "lada"}, 50, 100}
+    };
+
+    vector<Resep> resepValid;
+    for (Resep& r : semuaResep) {
+        int cocok = jumlahBahanCocok(bahanTersedia, r.bahan);
+        if (cocok >= 3) {
+            r.skorKecocokan = static_cast<double>(cocok) / r.bahan.size();
+            resepValid.push_back(r);
+        }
+    }
+
+    if (resepValid.empty()) {
+        cout << "\n❌ Masukkan minimal 3 resep!\n";
+        return 0;
+    }
