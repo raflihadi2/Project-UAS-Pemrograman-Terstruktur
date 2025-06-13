@@ -146,3 +146,89 @@ int main() {
         cout << "\n❌ Masukkan minimal 3 resep!\n";
         return 0;
     }
+
+mergeSort(resepValid, 0, resepValid.size() - 1);
+
+    int waktuMax;
+    cout << "\nMasukkan batas waktu memasak maksimal (menit): ";
+    cin >> waktuMax;
+    cin.ignore();
+
+    vector<Resep> hasil;
+    int totalGizi = 0;
+
+    vector<Resep> resepCocokPenuh;
+    for (Resep& r : resepValid) {
+        if (r.skorKecocokan == 1.0 && r.waktuMasak <= waktuMax) {
+            resepCocokPenuh.push_back(r);
+            totalGizi += r.nilaiGizi;
+            waktuMax -= r.waktuMasak;
+        }
+    }
+
+    if (waktuMax > 0) {
+        vector<Resep> sisaResep;
+        for (Resep& r : resepValid) {
+            if (r.skorKecocokan < 1.0 && r.waktuMasak <= waktuMax) {
+                sisaResep.push_back(r);
+            }
+        }
+        vector<Resep> tambahan;
+        totalGizi += knapsack(sisaResep, waktuMax, tambahan);
+        hasil.insert(hasil.end(), tambahan.begin(), tambahan.end());
+    }
+
+    hasil.insert(hasil.begin(), resepCocokPenuh.begin(), resepCocokPenuh.end());
+
+    cout << "\nRekomendasi Resep:\n";
+    for (Resep& r : hasil) {
+        cout << "- " << r.nama << " (Waktu: " << r.waktuMasak << " menit, Gizi: " << r.nilaiGizi << ")\n";
+    }
+    cout << "Total Gizi: " << totalGizi << endl;
+
+    simpanKeFile(hasil, totalGizi);
+
+    return 0;
+}mergeSort(resepValid, 0, resepValid.size() - 1);
+
+    int waktuMax;
+    cout << "\nMasukkan batas waktu memasak maksimal (menit): ";
+    cin >> waktuMax;
+    cin.ignore();
+
+    vector<Resep> hasil;
+    int totalGizi = 0;
+
+    vector<Resep> resepCocokPenuh;
+    for (Resep& r : resepValid) {
+        if (r.skorKecocokan == 1.0 && r.waktuMasak <= waktuMax) {
+            resepCocokPenuh.push_back(r);
+            totalGizi += r.nilaiGizi;
+            waktuMax -= r.waktuMasak;
+        }
+    }
+
+    if (waktuMax > 0) {
+        vector<Resep> sisaResep;
+        for (Resep& r : resepValid) {
+            if (r.skorKecocokan < 1.0 && r.waktuMasak <= waktuMax) {
+                sisaResep.push_back(r);
+            }
+        }
+        vector<Resep> tambahan;
+        totalGizi += knapsack(sisaResep, waktuMax, tambahan);
+        hasil.insert(hasil.end(), tambahan.begin(), tambahan.end());
+    }
+
+    hasil.insert(hasil.begin(), resepCocokPenuh.begin(), resepCocokPenuh.end());
+
+    cout << "\nRekomendasi Resep:\n";
+    for (Resep& r : hasil) {
+        cout << "- " << r.nama << " (Waktu: " << r.waktuMasak << " menit, Gizi: " << r.nilaiGizi << ")\n";
+    }
+    cout << "Total Gizi: " << totalGizi << endl;
+
+    simpanKeFile(hasil, totalGizi);
+
+    return 0;
+}
